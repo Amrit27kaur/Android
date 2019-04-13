@@ -34,10 +34,10 @@ public class ProfileFragment extends Fragment {
 
         des = (TextView)view.findViewById(R.id.txtDesc);
 
-        String name1 = getIntent().getStringExtra("name");
+        String name1 = getArguments().getString("name");
 
-        String descri = getIntent().getStringExtra("desc");
-        String str_id = getIntent().getStringExtra("Id");
+        String descri = getArguments().getString("desc");
+        String str_id = getArguments().getString("Id");
 
         this.id = Integer.parseInt(str_id);
 

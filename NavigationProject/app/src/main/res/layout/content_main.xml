@@ -10,7 +10,7 @@
 
     <FrameLayout
         android:id="@+id/FrameLayout"
-        android:layout_width="395dp"
+        android:layout_width="394dp"
         android:layout_height="655dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"

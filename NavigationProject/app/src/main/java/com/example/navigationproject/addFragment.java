@@ -107,32 +107,7 @@ public class addFragment extends Fragment {
 
         lt.setAdapter(ca);
 
-        lt.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                onCall();
-
-                ProfileFragment pF = new ProfileFragment();
-                Bundle args = new Bundle();
-                args.putString("name" ,userDataFromDBname.get(position));
-                args.putString("name" ,userDataFromDBdescription.get(position));
-                args.putString("name" ,userDataFromDBId.get(position).toString());
-
-
-                pF.setArguments(args);
-
-                getFragmentManager().beginTransaction().add(R.id.FrameLayout).commit();
-
-
-               // Intent profile = new Intent(getActivity(),ProfileFragment.class);
-
-
-                //profile.putExtra("integer" , position);
-
-                startActivity(profile);
-            }
-        });
     }
 }
 

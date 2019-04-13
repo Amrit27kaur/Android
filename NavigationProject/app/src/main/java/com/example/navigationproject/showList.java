@@ -20,17 +20,18 @@ import java.util.ArrayList;
 public class showList extends Fragment {
 
 
+    View view;
     public showList() {
         // Required empty public constructor
     }
 
-
+    View v;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_show_list, container, false);
-
+        this.v = view;
 
         final ArrayList<String> userDataFromDBname = new ArrayList<>();
         final ArrayList<String> userDataFromDBdescription = new ArrayList<>();
@@ -52,15 +53,65 @@ public class showList extends Fragment {
 
         ListView lt = (ListView)view.findViewById(R.id.list);
 
-        Log.i("length ------- ", Integer.toString(userDataFromDBdescription.size()));
         lt.setAdapter(ca);
         return view;
 
-
-
-
     }
 
+
+    public  void onCall()
+    {
+
+        final ArrayList<String> userDataFromDBname = new ArrayList<>();
+        final ArrayList<String> userDataFromDBdescription = new ArrayList<>();
+        final ArrayList<Integer> userDataFromDBId = new ArrayList<>();
+
+
+        DBhelper dbh = new DBhelper(getContext());
+        Cursor data = dbh.getData();
+
+        while(data.moveToNext())
+        {
+            userDataFromDBname.add(data.getString(1));
+            userDataFromDBdescription.add(data.getString(2));
+            userDataFromDBId.add(data.getInt(0));
+        }
+
+        // CustomAdapter ca = new CustomAdapter(this.getContext(), names, description);
+        CustomAdapter ca = new CustomAdapter(getContext(), userDataFromDBname ,userDataFromDBdescription);
+
+        ListView lt = (ListView)v.findViewById(R.id.list);
+
+        lt.setAdapter(ca);
+
+        lt.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                onCall();
+
+                ProfileFragment pF = new ProfileFragment();
+                Bundle args = new Bundle();
+                args.putString("name" ,userDataFromDBname.get(position));
+                args.putString("name" ,userDataFromDBdescription.get(position));
+                args.putString("name" ,userDataFromDBId.get(position).toString());
+
+
+                pF.setArguments(args);
+
+                getFragmentManager().beginTransaction().replace(R.id.FrameLayout, pF).commit();
+
+
+
+                // Intent profile = new Intent(getActivity(),ProfileFragment.class);
+
+
+                //profile.putExtra("integer" , position);
+
+                //startActivity(profile);
+            }
+        });
+    }
 
 
 }
