@@ -46,7 +46,7 @@ public class addFragment extends Fragment {
 
 
 
-      View view = inflater.inflate(R.layout.fragment_add, container, false);
+        View view = inflater.inflate(R.layout.fragment_add, container, false);
 
       this.v = view;
         et1 = (EditText)view.findViewById(R.id.name);
@@ -55,6 +55,8 @@ public class addFragment extends Fragment {
 
         Button add = (Button)view.findViewById(R.id.addBtn);
         //onCall();
+
+
 
         add.setOnClickListener( new View.OnClickListener() {
             @Override

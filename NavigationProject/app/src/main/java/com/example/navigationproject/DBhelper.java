@@ -68,6 +68,22 @@ public class DBhelper extends SQLiteOpenHelper
         Log.i("Delete query is ", sql);
         db.execSQL(sql);
     }
+
+    public boolean updateData(String name,String description ,int id){
+        SQLiteDatabase db=this.getWritableDatabase();
+        ContentValues data=new ContentValues();
+        data.put(COL1,name);
+        data.put(COL2,description);
+        long result=db.update(Table_name, data, "id=" + id, null);
+        //String strSQL = "UPDATE "+Table_name+" SET name "+name+" WHERE id = "+id;
+        //db.rawQuery(strSQL,null);
+        if(result==-1){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
 }
 
 
